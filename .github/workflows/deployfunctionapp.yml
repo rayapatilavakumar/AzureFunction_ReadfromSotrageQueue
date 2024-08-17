@@ -1,0 +1,18 @@
+name: Deploy Azure Function App
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+    - uses: actions/checkout@v3
+
+    - name: Set up .Net SDK
+    - uses: ations/setup-dotnet@v1
+      with:
+        dotnet-version: '8.x'
