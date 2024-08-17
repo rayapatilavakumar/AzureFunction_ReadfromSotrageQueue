@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: '8.x'
 
-    -name: Install  Dependencies
-      run: dotnet restore ./AzureFunction_BlobReader/AzureFunction_BlobReader.sln
+    - name: Install  Dependencies
+      run: dotnet restore
 
    
