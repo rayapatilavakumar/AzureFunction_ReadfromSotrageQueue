@@ -1,5 +1,8 @@
 name: Deploy Azure Function App
 
+env:
+  Azure_FunctionApp_Name: "rlk-functionapp"
+
 on:
   push:
     branches:
@@ -26,6 +29,13 @@ jobs:
 
     - name: Publish
       run: dotnet publish -c Release --no-build -o ./publish
+
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.Azure_FunctionApp_Name }}
+        publish-profile: ${{ secrets.Azure_FunctionApp_Secret}}
+        package: ./publish
            
            
 
