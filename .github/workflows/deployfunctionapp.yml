@@ -36,12 +36,12 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release --no-build -o ./publish
 
-# Publishes the code to Azure Function App
+# Publishes the code to Azure Function App, with a repository level Env. variable
 
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: ${{Azure_FunctionApp_Name}}
+        app-name: ${{env.Azure_FunctionApp_Name}}
         publish-profile: ${{ secrets.Azure_FunctionApp_Secret}}
         package: ./publish
            
