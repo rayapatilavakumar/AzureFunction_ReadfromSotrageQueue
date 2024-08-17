@@ -1,12 +1,12 @@
-name: Deploy Azure Function App
+name: Deploy Azure Function App onto Azure using Github Actions
 
-env:
-  Azure_FunctionApp_Name: "rlk-functionapp"
-
+# Triggers  on a push to the repository
 on:
   push:
     branches:
       - main
+
+# Initiates the build by creating a VM
 
 jobs:
   build:
@@ -16,24 +16,32 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
+# Setting up .Net version
+
     - name: Set up .Net SDK
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.x'
 
-    - name: Install  Dependencies
+# Restores all Nuget Packages
+    - name: Install Dependencies
       run: dotnet restore
 
+# Builds the code
     - name: Build
       run: dotnet build --configuration Release --no-restore
+
+# Publishes the code to local folder
 
     - name: Publish
       run: dotnet publish -c Release --no-build -o ./publish
 
+# Publishes the code to Azure Function App
+
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: ${{ env.Azure_FunctionApp_Name }}
+        app-name: ${{ variables.Azure_FunctionApp_Name }}
         publish-profile: ${{ secrets.Azure_FunctionApp_Secret}}
         package: ./publish
            
