@@ -1,4 +1,5 @@
 name: Deploy Azure Function App
+
 on:
   push:
     branches:
@@ -10,9 +11,9 @@ jobs:
 
     steps:
     - name: Checkout Repository
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
 
     - name: Set up .Net SDK
-    - uses: ations/setup-dotnet@v1
+      uses: ations/setup-dotnet@v1
       with:
         dotnet-version: '8.x'
