@@ -41,7 +41,7 @@ jobs:
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: ${{ variables.Azure_FunctionApp_Name }}
+        app-name: $Azure_FunctionApp_Name
         publish-profile: ${{ secrets.Azure_FunctionApp_Secret}}
         package: ./publish
            
